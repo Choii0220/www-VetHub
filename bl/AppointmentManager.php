@@ -16,7 +16,6 @@ class AppointmentManager {
         $reason = trim($reason);
         $notes = trim($notes);
 
-        // Server-side validation
         if ($petID === "" || $ownerID === "" || $appointmentDate === "" || $appointmentTime === "" || $status === "") {
             echo "error";
             return;
@@ -127,44 +126,133 @@ class AppointmentManager {
         $body = "
         <html>
         <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <style>
-                body { font-family: Arial, sans-serif; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background-color: #2196F3; color: white; padding: 20px; border-radius: 5px; }
-                .content { padding: 20px; background-color: #f9f9f9; margin-top: 20px; border-radius: 5px; }
-                .detail-row { margin: 10px 0; }
-                .label { font-weight: bold; color: #2196F3; }
-                .footer { margin-top: 20px; text-align: center; font-size: 12px; color: #666; }
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                    color: #2c3e50; 
+                    background-color: #f5f5f5;
+                    line-height: 1.6;
+                }
+                .container { 
+                    max-width: 600px; 
+                    margin: 0 auto; 
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                }
+                .header { 
+                    background: linear-gradient(135deg, #7A8F6B 0%, #6b7e5e 100%);
+                    color: white; 
+                    padding: 30px 20px;
+                    border-radius: 8px 8px 0 0;
+                    text-align: center;
+                    margin: -20px -20px 30px -20px;
+                }
+                .header h2 { 
+                    font-size: 28px;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                }
+                .greeting {
+                    margin-top: 20px;
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                    color: #2c3e50;
+                }
+                .confirmation-message {
+                    font-size: 15px;
+                    color: #555;
+                    margin-bottom: 25px;
+                    line-height: 1.7;
+                }
+                .details-section {
+                    background-color: #f9fafb;
+                    padding: 20px;
+                    border-radius: 6px;
+                    margin: 20px 0;
+                    border-left: 4px solid #7A8F6B;
+                }
+                .detail-row { 
+                    margin: 12px 0;
+                    display: flex;
+                    align-items: baseline;
+                }
+                .detail-row:last-child {
+                    margin-bottom: 0;
+                }
+                .label { 
+                    font-weight: 600;
+                    color: #7A8F6B; 
+                    min-width: 140px;
+                    font-size: 14px;
+                }
+                .value {
+                    color: #2c3e50;
+                    font-size: 14px;
+                }
+                .closing-message {
+                    margin-top: 25px;
+                    font-size: 14px;
+                    color: #555;
+                    line-height: 1.7;
+                }
+                .footer { 
+                    margin-top: 30px; 
+                    padding-top: 20px;
+                    border-top: 1px solid #e1e8ed;
+                    text-align: center; 
+                    font-size: 12px; 
+                    color: #999; 
+                }
+                .footer p {
+                    margin: 0;
+                }
             </style>
         </head>
         <body>
             <div class='container'>
                 <div class='header'>
-                    <h2>Appointment Confirmation</h2>
+                    <h2>Appointment Confirmed</h2>
                 </div>
-                <div class='content'>
-                    <p>Dear $ownerName,</p>
-                    <p>Your appointment has been scheduled successfully. Please find the details below:</p>
-                    
+
+                <p class='greeting'>Dear $ownerName,</p>
+                
+                <p class='confirmation-message'>
+                    Your appointment has been scheduled successfully. Here are your appointment details:
+                </p>
+                
+                <div class='details-section'>
                     <div class='detail-row'>
-                        <span class='label'>Pet Name:</span> " . htmlspecialchars($appointment['petName']) . "
+                        <span class='label'>Pet Name:</span>
+                        <span class='value'>" . htmlspecialchars($appointment['petName']) . "</span>
                     </div>
                     <div class='detail-row'>
-                        <span class='label'>Appointment Date:</span> " . date('F d, Y', strtotime($appointment['appointmentDate'])) . "
+                        <span class='label'>Appointment Date:</span>
+                        <span class='value'>" . date('F d, Y', strtotime($appointment['appointmentDate'])) . "</span>
                     </div>
                     <div class='detail-row'>
-                        <span class='label'>Appointment Time:</span> " . htmlspecialchars($appointment['appointmentTime']) . "
+                        <span class='label'>Appointment Time:</span>
+                        <span class='value'>" . htmlspecialchars($appointment['appointmentTime']) . "</span>
                     </div>
                     <div class='detail-row'>
-                        <span class='label'>Reason:</span> " . htmlspecialchars($appointment['reason']) . "
+                        <span class='label'>Reason:</span>
+                        <span class='value'>" . htmlspecialchars($appointment['reason']) . "</span>
                     </div>
                     <div class='detail-row'>
-                        <span class='label'>Status:</span> " . htmlspecialchars($appointment['status']) . "
+                        <span class='label'>Status:</span>
+                        <span class='value'>" . htmlspecialchars($appointment['status']) . "</span>
                     </div>
-                    
-                    <p style='margin-top: 20px;'>If you need to reschedule or cancel, please contact us as soon as possible.</p>
-                    <p>Thank you!</p>
                 </div>
+                
+                <div class='closing-message'>
+                    <p>If you need to reschedule or cancel your appointment, please contact us as soon as possible.</p>
+                    <p style='margin-top: 15px;'>Thank you!</p>
+                </div>
+                
                 <div class='footer'>
                     <p>This is an automated message from VetHub. Please do not reply to this email.</p>
                 </div>

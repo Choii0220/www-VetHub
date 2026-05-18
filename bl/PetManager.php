@@ -17,7 +17,6 @@ class PetManager {
         $color = trim($color);
         $microchipID = trim($microchipID);
 
-        // Server-side validation
         if ($ownerID === "" || $petName === "" || $species === "") {
             echo "error";
             return;

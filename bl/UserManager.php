@@ -16,7 +16,6 @@ class UserManager {
         $l = trim($l);
         $prc = trim($prc);
 
-        // Server-side validation
         if ($f === "" || $l === "" || $email === "" || $p === "" || $prc === "") {
             echo "error";
             return;

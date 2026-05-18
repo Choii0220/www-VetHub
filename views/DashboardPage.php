@@ -40,10 +40,15 @@ $allPets = $petmanager->getPets();
 $speciesCounts = [];
 
 foreach ($allPets as $pet) {
-    $species = $pet['species'] ? $pet['species'] : 'Unknown';
+
+    $species = !empty($pet['species'])
+        ? strtolower(trim($pet['species']))
+        : 'unknown';
+
     if (!isset($speciesCounts[$species])) {
         $speciesCounts[$species] = 0;
     }
+
     $speciesCounts[$species]++;
 }
 
@@ -278,9 +283,9 @@ $user = $_SESSION["user"];
                 datasets: [{
                     data: Object.values(statusData),
                     backgroundColor: [
-                        '#4CAF50',  // Green for Scheduled
-                        '#2196F3',  // Blue for Completed
-                        '#f44336'   // Red for Cancelled
+                        '#4CAF50',  
+                        '#2196F3',
+                        '#f44336' 
                     ],
                     borderColor: '#fff',
                     borderWidth: 2
@@ -355,7 +360,7 @@ $user = $_SESSION["user"];
         const speciesLabels = <?php echo $speciesChartLabels; ?>;
         const speciesData = <?php echo $speciesChartData; ?>;
         
-        // Generate random colors for dynamic species chart
+        // color random
         const generateColors = (count) => {
             const colors = [];
             const hues = [];

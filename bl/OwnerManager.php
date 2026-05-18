@@ -20,7 +20,6 @@ class OwnerManager {
         $province = trim($province);
         $postalCode = trim($postalCode);
 
-        // Server-side validation
         if ($firstName === "" || $lastName === "" || $email === "" || $phone === "") {
             echo "error";
             return;
