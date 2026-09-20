@@ -436,9 +436,4 @@ Before submitting or running the project, make sure:
 - [ ] `model/database.php` has the correct local database credentials.
 - [ ] `http://localhost/VetHub/views/LoginPage.php` opens successfully.
 
----
-
-## 📚 Database Reference
-
-The database name, six required tables, column definitions, primary keys, unique email constraints, and foreign-key relationships in this README are based on the VetHub project database specification provided with the project.
 
